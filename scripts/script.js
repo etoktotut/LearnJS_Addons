@@ -11,11 +11,11 @@ const DomElement = function (selector, options) {
 
 DomElement.prototype.elemCreate = function (strToElem) {
     let el;
-    if (this.selector.charAt(0) === '.') {
+    if (this.selector[0] === '.') {
         el = document.createElement('div');
         el.className = this.selector.substring(1);
     }
-    if (this.selector.charAt(0) === '#') {
+    if (this.selector[0] === '#') {
         el = document.createElement('p');
         el.setAttribute('id', this.selector.substring(1));
     }
@@ -24,5 +24,5 @@ DomElement.prototype.elemCreate = function (strToElem) {
     document.querySelector('body').insertAdjacentElement('afterbegin', el);
 };
 
-const first = new DomElement('#fufu', { height: '10%', width: '40%', bg: 'green', fontSize: '30px' });
+const first = new DomElement('.fufu', { height: '10%', width: '40%', bg: 'green', fontSize: '30px' });
 first.elemCreate('Гога!');
