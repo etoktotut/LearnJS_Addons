@@ -6,8 +6,8 @@ const dayTime = document.querySelector('.day-time'),
     timeDashed = document.querySelector('.time-dashed'),
     tillNewYear = document.querySelector('.till-newyear');
 
-const timesOfDay = (date) => {
-    let hour = date.getHours();
+const timesOfDay = date => {
+    const hour = date.getHours();
     if (hour >= 0 && hour < 12) {
         return "ой ночи!";
     } else if (hour >= 6 && hour <= 12) {
@@ -18,13 +18,13 @@ const timesOfDay = (date) => {
     return "ый вечер!";
 };
 
-const zeroAdd = z => z < 10 ? 0 + String(z) : String(z);
-const checkAM = h => h > 12 ? h % 12 : h;
-const ampm = h => h > 12 ? 'PM' : 'AM';
+const zeroAdd = z => (z < 10 ? 0 + String(z) : String(z));
+const checkAM = h => (h > 12 ? h % 12 : h);
+const ampm = h => (h > 12 ? 'PM' : 'AM');
 const timeAmPm = date => `${zeroAdd(checkAM(date.getHours()))}:${zeroAdd(date.getMinutes())}:${zeroAdd(date.getSeconds())} ${ampm(date.getHours())}`;
 
-const daysWithEnding = (days) => {
-    let daysToStr = days.toString();
+const daysWithEnding = days => {
+    const daysToStr = days.toString();
     switch (Number(daysToStr[daysToStr.length - 1])) {
         case 0:
             return daysToStr + ' дней';
@@ -32,7 +32,6 @@ const daysWithEnding = (days) => {
             return daysToStr + ' день';
         case 2:
         case 3:
-
         case 4:
             return daysToStr + ' дня';
         default:
@@ -40,7 +39,7 @@ const daysWithEnding = (days) => {
     }
 };
 
-const toNewYear = (date) => {
+const toNewYear = date => {
     const nextNY = new Date();
     nextNY.setFullYear(date.getFullYear() + 1, 0, 1);
     nextNY.setHours(0, 0, 0);
@@ -49,7 +48,6 @@ const toNewYear = (date) => {
 
 const renderDate = () => {
     const currDate = new Date();
-    let days = toNewYear(currDate);
     dayTime.textContent = timesOfDay(currDate);
     dayWeek.textContent = week[currDate.getDay()];
     timeDashed.textContent = timeAmPm(currDate);
