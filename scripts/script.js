@@ -1,25 +1,42 @@
 'use strict';
-const inpText = document.querySelector('input');
-const pText = document.querySelector('p');
+const bird = document.querySelector('.bird');
+const btn = document.querySelector('.button-stop');
+const btnReset = document.querySelector('.button-reset');
 
-const render = () => pText.textContent = inpText.value;
+let frameId, stopped = true;
+let step = 10;
 
-const postpone = (func, ms) => {
-    let isPostponed = false;
-    let postponeTimer;
+const render = () => {
 
-    const postponeAndRun = () => {
-        if (isPostponed) {
-            clearTimeout(postponeTimer);
-        }
-        isPostponed = true;
-        postponeTimer = setTimeout(() => {
-            isPostponed = false;
-            func();
-        }, ms);
-    };
+    bird.style.top = step + 'px';
+    bird.style.left = step + 'px';
+    step += 10;
+    frameId = requestAnimationFrame(render);
 
-    return postponeAndRun;
+    if (step >= (window.innerHeight - 138) || step >= (window.innerWidth - 138)) {
+        step = 10;
+    }
+
 };
 
-inpText.addEventListener('input', postpone(render, 1000));
+btn.addEventListener('click', () => {
+    stopped = !stopped;
+    if (stopped) {
+        cancelAnimationFrame(frameId);
+        btn.textContent = "СТАРТ!";
+    } else {
+        frameId = requestAnimationFrame(render);
+        btn.textContent = " СТОП !";
+    }
+
+});
+
+btnReset.addEventListener('click', () => {
+    if (frameId) { cancelAnimationFrame(frameId); }
+    bird.style.top = '10px';
+    bird.style.left = '0px';
+    step = 10;
+    stopped = true;
+    btn.textContent = "СТАРТ!";
+});
+

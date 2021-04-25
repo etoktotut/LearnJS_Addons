@@ -2,3 +2,28 @@ body {
     background: url('../img/IMG_8247.jpg') 0 0/ 100%;
     background-repeat: no-repeat;
 }
+
+.bird {
+    position: relative;
+    top: 10;
+}
+
+.button-stop {
+    position: relative;
+    left: 20px;
+    top: 100px;
+    font-family: Arial,
+        Helvetica,
+        sans-serif;
+    font-size: 28px;
+}
+
+.button-reset {
+    position: relative;
+    left: 20px;
+    top: 130px;
+    font-family: Arial,
+        Helvetica,
+        sans-serif;
+    font-size: 28px;
+}
